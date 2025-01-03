@@ -20,13 +20,15 @@
 
         .card {
             background: white;
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 15px;
+            padding: 40px;
             text-align: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
             display: none; /* Initially hidden */
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
+            width: 80%;
+            max-width: 400px;
         }
 
         .card.active {
@@ -34,13 +36,13 @@
         }
 
         .button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             background-color: #ff6f61;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .button:hover {
@@ -59,6 +61,17 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #ff6f61;
+            margin: 0;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #333;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/confetti-js/dist/index.min.js"></script>
