@@ -27,10 +27,11 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            display: none; /* Initially hidden */
         }
 
-        .hidden {
-            display: none;
+        .card.active {
+            display: flex; /* Show only active card */
         }
 
         .button {
@@ -61,26 +62,26 @@
 <body>
     <canvas id="confetti-canvas"></canvas>
 
-    <div class="card" id="passwordStep">
+    <div class="card active" id="passwordStep">
         <h1>Welcome, Loresa!</h1>
         <p>Enter the secret password to continue:</p>
         <input type="text" id="passwordInput" placeholder="Enter the password">
         <button class="button" onclick="checkPassword()">Submit</button>
     </div>
 
-    <div class="card hidden" id="step1">
+    <div class="card" id="step1">
         <h1>Hi Loresa!</h1>
         <p>Happy New Year, you're the best <3</p>
         <button class="button" onclick="goToStep2()">Continue</button>
     </div>
 
-    <div class="card hidden" id="step2">
+    <div class="card" id="step2">
         <p>What is the name of our song?</p>
         <input type="text" id="songInput" placeholder="Enter the song name">
         <button class="button" onclick="checkSong()">Submit</button>
     </div>
 
-    <div class="card hidden" id="step3">
+    <div class="card" id="step3">
         <h1>You did it!</h1>
         <p>Click the button below to play our song:</p>
         <button class="button" onclick="playSong()">Play Song</button>
@@ -92,8 +93,8 @@
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
             if (password === '999') {
-                document.getElementById('passwordStep').classList.add('hidden');
-                document.getElementById('step1').classList.remove('hidden');
+                document.getElementById('passwordStep').classList.remove('active');
+                document.getElementById('step1').classList.add('active');
                 confetti.render(); // Trigger confetti
                 setTimeout(() => confetti.clear(), 5000); // Stop confetti after 5 seconds
             } else {
@@ -102,22 +103,22 @@
         }
 
         function goToStep2() {
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('step2').classList.remove('hidden');
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
         }
 
         function checkSong() {
             const songInput = document.getElementById('songInput').value.toLowerCase();
             if (songInput === 'neptun') {
-                document.getElementById('step2').classList.add('hidden');
-                document.getElementById('step3').classList.remove('hidden');
+                document.getElementById('step2').classList.remove('active');
+                document.getElementById('step3').classList.add('active');
             } else {
                 alert('Wrong song! Try again.');
             }
         }
 
         function playSong() {
-            const audio = new Audio('./Neptun.mp3'); // Ensure this file is in the same directory
+            const audio = new Audio('./Neptun.mp3'); // Ensure this file is in the same folder as this HTML file
             audio.play().then(() => {
                 console.log("Audio is playing.");
             }).catch(error => {
