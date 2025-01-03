@@ -79,6 +79,10 @@
     <div class="card hidden" id="step3">
         <p>Enjoy the song! You did it!</p>
         <button class="button" onclick="playSong()">Play Song</button>
+        <audio id="song" controls>
+            <source src="Neptun.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <script>
@@ -112,10 +116,8 @@
         }
 
         function playSong() {
-            const audio = new Audio('/static/Neptun.mp3');
-            audio.play().then(() => {
-                console.log('Audio is playing.');
-            }).catch(error => {
+            const audio = document.getElementById('song');
+            audio.play().catch(error => {
                 alert('Unable to play the song. Please tap the button again or check the audio link.');
                 console.error('Error playing audio:', error);
             });
