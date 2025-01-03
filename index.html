@@ -24,10 +24,9 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            display: flex;
+            display: none; /* Initially hidden */
             flex-direction: column;
             gap: 20px;
-            display: none; /* Initially hidden */
         }
 
         .card.active {
@@ -48,6 +47,11 @@
             background-color: #ff4a3d;
         }
 
+        audio {
+            width: 100%;
+            outline: none;
+        }
+
         canvas {
             position: fixed;
             top: 0;
@@ -62,6 +66,7 @@
 <body>
     <canvas id="confetti-canvas"></canvas>
 
+    <!-- Step 1: Password Step -->
     <div class="card active" id="passwordStep">
         <h1>Welcome, Loresa!</h1>
         <p>Enter the secret password to continue:</p>
@@ -69,22 +74,28 @@
         <button class="button" onclick="checkPassword()">Submit</button>
     </div>
 
+    <!-- Step 2: Greeting Step -->
     <div class="card" id="step1">
         <h1>Hi Loresa!</h1>
         <p>Happy New Year, you're the best <3</p>
         <button class="button" onclick="goToStep2()">Continue</button>
     </div>
 
+    <!-- Step 3: Song Name Step -->
     <div class="card" id="step2">
         <p>What is the name of our song?</p>
         <input type="text" id="songInput" placeholder="Enter the song name">
         <button class="button" onclick="checkSong()">Submit</button>
     </div>
 
+    <!-- Step 4: Play Song Step -->
     <div class="card" id="step3">
         <h1>You did it!</h1>
-        <p>Click the button below to play our song:</p>
-        <button class="button" onclick="playSong()">Play Song</button>
+        <p>Here’s our song:</p>
+        <audio id="audioPlayer" controls>
+            <source src="./Neptun.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <script>
@@ -115,16 +126,6 @@
             } else {
                 alert('Wrong song! Try again.');
             }
-        }
-
-        function playSong() {
-            const audio = new Audio('./Neptun.mp3'); // Ensure this file is in the same folder as this HTML file
-            audio.play().then(() => {
-                console.log("Audio is playing.");
-            }).catch(error => {
-                alert("Unable to play the song. Please ensure the file exists in the correct directory.");
-                console.error("Error playing audio:", error);
-            });
         }
     </script>
 </body>
